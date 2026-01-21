@@ -18,13 +18,20 @@ const getcontact=(req,res)=>{
 //@description post  contact 
 //@route post/api/contacts
 //@access public
-const createContact =(req,res)=>{
+const createContact =(req,res,next)=>{
+    console.log("the req body is :",req.body);
+    const{name,email,phone}=req.body;
+    if(!name||!email||!phone)   {
+        res.status(400);
+       return next(new Error("all fields are mandatory"));
+    };
+
     res.status(201).json({messages:"create a contact"});
 
 };
 
 
-//@description update  contact 
+//@description update  contact S
 //@route put/api/contacts/:id
 //@access public
 const updateContact =(req,res)=>{
